@@ -1,18 +1,4 @@
 <h1>New product</h1>
 
-<%= form_with model: @product do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-    <% if form.object.errors.has_key? :name %>
-    <div> 
-      <%= form.object.errors.full_messages_for :name %>
-
-    </div>
-    <% end %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+<%= render "form", product: @product %>
+<%= link_to "Cancel", products_path %>
