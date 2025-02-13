@@ -26,7 +26,8 @@
     <nav>
     <%= link_to "Home", root_path %>
     <%= button_to "Log out", session_path, method: :delete if authenticated? %>
-  </nav>
+    <%= link_to "Profile", user_path %>
+    </nav>
 
   <main>
     <%= yield %>
