@@ -29,7 +29,3 @@
 
 en:
   hello: "Hello world"
-  products:
-    index:
-      title: "Products"
-
