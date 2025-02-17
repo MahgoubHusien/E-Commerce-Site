@@ -23,11 +23,13 @@
   </head>
 
   <body>
+
     <nav>
     <%= link_to "Home", root_path %>
     <%= button_to "Log out", session_path, method: :delete if authenticated? %>
     <%= link_to "Profile", user_path %>
     </nav>
+    <div class="notice"><%= notice %></div>
 
   <main>
     <%= yield %>
