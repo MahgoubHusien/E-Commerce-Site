@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for(:title) || "Store" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%# Includes all stylesheet files in app/assets/tailwind %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-100 text-gray-900">
+    
+    <nav class="bg-blue-600 text-white p-4 shadow-md">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+          <%= link_to "Home", root_path, class: "text-2xl font-bold tracking-wide" %>
+        </div>
+        <div class="flex items-center space-x-4">
+          <%= link_to "Profile", user_path, class: "px-4 py-2 rounded-lg bg-white text-blue-600 hover:bg-gray-200 transition" %>
+          <% if authenticated? %>
+            <%= button_to "Log out", session_path, method: :delete, class: "px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition" %>
+          <% else %>
+            <%= link_to "Login", new_session_path, class: "px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-700 transition" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <section class="bg-blue-500 text-white py-16 text-center shadow-lg">
+      <h1 class="text-4xl font-bold mb-2">Welcome to Our Store</h1>
+      <p class="text-lg opacity-90">Shop the best products at the best prices.</p>
+      <%= link_to "Shop Now", products_path, class: "mt-4 inline-block px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow hover:bg-gray-200 transition" %>
+    </section>
+
+    <% if notice %>
+      <div class="bg-green-100 text-green-700 p-4 text-center shadow-sm">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <main class="max-w-7xl mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
+      <%= yield %>
+    </main>
+    </body>
+</html>

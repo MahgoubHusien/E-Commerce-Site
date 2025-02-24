@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
     @product.destroy
     redirect_to products_path
   end
-  
+
 
   private
     def set_product
@@ -47,5 +47,4 @@ class ProductsController < ApplicationController
     def product_params
       params.expect(product: [ :name, :description, :featured_image, :inventory_count ])
     end
-
 end

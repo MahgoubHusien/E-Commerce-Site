@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for(:title) || "Store" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-100 text-gray-900">
+    <nav class="bg-blue-600 text-white p-4 shadow-md">
+    <h1>Welcome to the Rails </h1>
+      <div class="container mx-auto flex justify-between items-center">
+        <%= link_to "Store", root_path, class: "text-2xl font-bold" %>
+        <div class="space-x-4">
+          <%= link_to "Profile", user_path, class: "px-4 py-2 rounded-lg bg-white text-blue-600 hover:bg-gray-200 transition" %>
+          <% if authenticated? %>
+            <%= button_to "Log out", session_path, method: :delete, class: "px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 transition" %>
+          <% else %>
+            <%= link_to "Login", new_session_path, class: "px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-700 transition" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <% if notice %>
+      <div class="bg-green-100 text-green-700 p-4 text-center">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <main class="container mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
+      <%= yield %>
+    </main>
+  </body>
+</html>
