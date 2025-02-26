@@ -1,0 +1,7 @@
+<div class="mt-4">
+  <% if current_user.wishlist_products.include?(product) %>
+    <%= button_to "Remove from Wishlist", wishlist_item_path(product_id: product.id), method: :delete, class: "bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition" %>
+  <% else %>
+    <%= button_to "Add to Wishlist", wishlist_items_path(product_id: product.id), method: :post, class: "bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" %>
+  <% end %>
+</div>

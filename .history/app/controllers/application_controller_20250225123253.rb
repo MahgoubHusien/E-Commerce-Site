@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   around_action :switch_locale
 
-  helper_method :current_user 
+  helper_method :current_user  # 👈 This makes current_user available in views
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]

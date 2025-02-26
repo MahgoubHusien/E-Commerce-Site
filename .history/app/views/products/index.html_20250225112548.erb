@@ -1,7 +1,7 @@
 <h1 class="text-3xl font-bold text-center text-gray-800 mb-6"><%= t ".title" %></h1>
 
 <div class="flex justify-center space-x-4 mb-6">
-  <% if authenticated? %>
+  <% if current_user %>
     <%= link_to "New product", new_product_path, class: "bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition" %>
   <% else %>
     <%= link_to "Login", new_session_path, class: "bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition" %>
@@ -17,7 +17,12 @@
       <% end %>
 
       <%= link_to product.name, product, class: "text-lg font-semibold text-gray-900 hover:text-blue-600" %>
+
+      <% if current_user && current_user.wishlist_products.include?(product) %>
+        <%= button_to "Remove from Wishlist", wishlist_item_path(product), method: :delete, class: "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition" %>
+      <% elsif current_user %>
+        <%= button_to "Add to Wishlist", wishlist_items_path(product_id: product.id), method: :post, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition" %>
+      <% end %>
     </div>
   <% end %>
 </div>
-

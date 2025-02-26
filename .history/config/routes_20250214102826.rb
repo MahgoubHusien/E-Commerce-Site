@@ -11,10 +11,6 @@ Rails.application.routes.draw do
     resources :subscribers, only: [ :create ]
   end
   resource :unsubscribe, only: [ :show ]
-  resources :products do
-    resources :wishlist_items, only: [:create, :destroy]
-  end
-  resources :wishlist_items, only: [:index, :create, :destroy]
 
 
   resource :user

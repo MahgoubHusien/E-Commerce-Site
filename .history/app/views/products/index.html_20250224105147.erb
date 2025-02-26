@@ -10,14 +10,17 @@
 
 <div id="products" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
   <% @products.each do |product| %>
-    <div class="bg-white shadow-md rounded-lg p-4 text-center hover:shadow-lg transition">
-      
+    <%= link_to product.name, class: "block bg-white shadow-md rounded-lg p-4 text-center hover:shadow-lg transition transform hover:scale-105" %>
+      <!-- Featured Image -->
       <% if product.featured_image.attached? %>
         <%= image_tag product.featured_image, class: "w-full h-48 object-cover rounded-t-lg mb-2" %>
       <% end %>
 
-      <%= link_to product.name, product, class: "text-lg font-semibold text-gray-900 hover:text-blue-600" %>
+      <!-- Product Name -->
+      <p class="text-lg font-semibold text-gray-900 hover:text-blue-600"><%= product.name %></p>
     </div>
+    </%= link_to %>
   <% end %>
 </div>
+
 
