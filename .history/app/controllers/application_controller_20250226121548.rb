@@ -9,10 +9,13 @@ class ApplicationController < ActionController::Base
   helper_method :current_user 
 
   def current_user
-    Rails.logger.debug "Session user_id: #{session[:user_id]}"
+    def current_user
+      Rails.logger.debug "Session user_id: #{session[:user_id]}"
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    end
+    
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
-  
 
   
   def switch_locale(&action)

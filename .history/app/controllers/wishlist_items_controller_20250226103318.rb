@@ -1,8 +1,8 @@
 class WishlistItemsController < ApplicationController
+  before_action :authenticate_user?
   before_action :set_product, only: %i[ create destroy ]
 
   def create
-    puts "Current user: #{current_user.inspect}"
     if current_user
       @wishlist_item = current_user.wishlist_items.find_or_initialize_by(product: @product)
 

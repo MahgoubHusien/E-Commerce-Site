@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate_by(params.permit(:email_address, :password))
     if user
-      session[:user_id] = user.id  
-      Rails.logger.debug "Session set for user_id: #{session[:user_id]}"  
+      session[:user_id] = user.id  # Ensure this line is present
+      Rails.logger.debug "Session set for user_id: #{session[:user_id]}"  # Debugging
       redirect_to root_path, notice: "Signed in successfully."
     else
       redirect_to new_session_path, alert: "Invalid email or password."
