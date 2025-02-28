@@ -1,5 +1,5 @@
 class WishlistItemsController < ApplicationController
-  before_action :set_product, only: %i[ create ]
+  before_action :set_product, only: %i[ create destroy ]
 
   def create
     puts "Current user: #{current_user.inspect}"

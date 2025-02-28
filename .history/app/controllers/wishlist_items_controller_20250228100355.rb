@@ -1,5 +1,5 @@
 class WishlistItemsController < ApplicationController
-  before_action :set_product, only: %i[ create ]
+  before_action :set_product, only: %i[ create destroy ]
 
   def create
     puts "Current user: #{current_user.inspect}"
@@ -20,7 +20,7 @@ class WishlistItemsController < ApplicationController
     if current_user
       @wishlist_item = current_user.wishlist_items.find(params[:id])
       @wishlist_item.destroy
-      redirect_to request.referer || user_path(current_user), notice: "Removed from wishlist."
+      redirect_to request.referer || root_path, notice: "Removed from wishlist."
     else
       redirect_to new_session_path, alert: "You must be logged in to remove items from your wishlist."
     end

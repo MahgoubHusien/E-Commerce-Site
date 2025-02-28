@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :products do
     resources :wishlist_items, only: [:create, :destroy]
   end
-  resources :wishlist_items, only: [:index, :create, :destroy]
+  resources :wishlist_items, only: [:index, :destroy]
   
 
 

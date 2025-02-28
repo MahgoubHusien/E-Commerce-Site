@@ -1,0 +1,22 @@
+<h1 class="text-2xl font-bold text-gray-800"><%= @user.email_address %></h1>
+
+<h1 class="text-2xl font-bold text-gray-800 mt">Wishlist</h1>
+
+<% if @wishlist_products.any? %>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+    <% @wishlist_products.each do |product| %>
+      <div class="bg-white shadow-md rounded-lg p-4 text-center hover:shadow-lg transition">
+        
+        <% if product.featured_image.attached? %>
+          <%= image_tag product.featured_image, class: "w-full h-48 object-cover rounded-t-lg mb-2" %>
+        <% end %>
+
+        <h2 class="text-lg font-semibold text-gray-900"><%= link_to product.name, product %></h2>
+
+        <%= button_to "Remove from Wishlist", wishlist_item_path(product), method: :delete, class: "mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition" %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-gray-600 mt-6">Your wishlist is empty.</p>
+<% end %>
